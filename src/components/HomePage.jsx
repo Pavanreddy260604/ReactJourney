@@ -40,7 +40,7 @@ function HomePage() {
           Learn React concepts, build projects, and enhance your frontend skills.
         </p>
         <Link
-          to="#topics"
+          to="/Topics"
           style={{
             padding: "14px 28px",
             backgroundColor: "#1E93AB",

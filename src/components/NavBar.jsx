@@ -85,89 +85,10 @@ function NavBar() {
           }}
         >
           {/* Topics dropdown */}
-          <li
-            style={{ position: "relative" }}
-            onMouseEnter={() => setDropdownHovered(true)}
-            onMouseLeave={() => setDropdownHovered(false)}
-          >
-            <span
-              style={{
-                ...linkStyle,
-                backgroundColor: dropdownHovered ? "#b3f2ffff" : "transparent",
-                color: "black",
-                borderRadius: "6px",
-                transition: "0.3s",
-              }}
-            >
-              Topics ▾
-            </span>
-
-            {dropdownHovered && (
-              <ul
-                style={{
-                  listStyleType: "none",
-                  margin: 0,
-                  padding: "10px 0",
-                  position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  backgroundColor: "white",
-                  boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
-                  borderRadius: "6px",
-                  minWidth: "160px",
-                  zIndex: 1000,
-                }}
-              >
-                {[
-                  { name: "Fragments", path: "/fragments" },
-                  { name: "Hooks", path: "/hooks" },
-                  { name: "Props", path: "/props" },
-                  { name: "State", path: "/state" },
-                ].map((concept, index) => (
-                  <li
-                    key={concept.name}
-                    onMouseEnter={() => setDropdownItemHovered(index)}
-                    onMouseLeave={() => setDropdownItemHovered(null)}
-                  >
-                    <Link
-                      to={concept.path}
-                      style={{
-                        ...dropdownLinkStyle,
-                        backgroundColor: dropdownItemHovered === index ? "#b3f2ffff" : "transparent",
-                        color: "black",
-                        transition: "0.3s",
-                      }}
-                    >
-                      {concept.name}
-                    </Link>
-                  </li>
-                ))}
-                 <li>
-      <Link
-  to="/topics"
-  style={{
-    ...dropdownLinkStyle,
-    backgroundColor: "#1E93AB",
-    color: "white",       // text white
-    fontWeight: "bold",   // bold text
-    borderRadius: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "6px 12px", // a bit more padding for a button look
-    textDecoration: "none",
-    transition: "0.3s",
-  }}
->
-  More
-</Link>
-      </li>
-              </ul>
-            )}
-          </li>
-
+         
           {/* Other nav links */}
           {[
+            {name:"Topics ", path:"/Topics"},
             { name: "Projects", path: "/projects" },
             { name: "Contact", path: "/contact" },
             { name: "About", path: "/about" },
