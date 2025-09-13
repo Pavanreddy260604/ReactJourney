@@ -142,6 +142,26 @@ function NavBar() {
                     </Link>
                   </li>
                 ))}
+                 <li>
+      <Link
+  to="/topics"
+  style={{
+    ...dropdownLinkStyle,
+    backgroundColor: "#1E93AB",
+    color: "white",       // text white
+    fontWeight: "bold",   // bold text
+    borderRadius: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "6px 12px", // a bit more padding for a button look
+    textDecoration: "none",
+    transition: "0.3s",
+  }}
+>
+  More
+</Link>
+      </li>
               </ul>
             )}
           </li>

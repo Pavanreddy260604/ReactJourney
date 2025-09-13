@@ -6,6 +6,8 @@ import FragmentsPage from "./components/FragmentsPage.jsx";
 import HooksPage from  "./components/HooksPage.jsx";
 import PropsPage from "./components/PropsPage"
 import StatePage from "./components/StatePage"
+import StylinginReact from "./components/StylingInReact.jsx";
+import Topics from "./components/Topics.jsx";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/hooks" element={<HooksPage/>} />
             <Route path="/props" element={<PropsPage/>} />
             <Route path="/state" element={<StatePage/>} />
+            <Route path="/style" element={<StylinginReact/>} />
+            <Route path = "TOpics" element= { <Topics/>}/>
             <Route path="/projects" element={<h1>Projects Page</h1>} />
             <Route path="/contact" element={<h1>Contact Page</h1>} />
             <Route path="/about" element={<h1>About Page</h1>} />

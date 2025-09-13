@@ -1,0 +1,45 @@
+#entire{
+    font-family: 'Roboto', sans-serif;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;}
+.Head{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#intro{
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+#example{
+    marginBottom: 50px;
+}
+#heading{
+    font-size: 1.5rem;
+     margin-bottom: 10px;
+}
+#code{
+    position: relative;
+}
+#code-bg{
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+#Button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding:6px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1E93AB;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+
+}
