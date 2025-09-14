@@ -1,118 +1,190 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function NavBar() {
   const [hovered, setHovered] = useState(null);
-  const [dropdownHovered, setDropdownHovered] = useState(false);
-  const [dropdownItemHovered, setDropdownItemHovered] = useState(null);
-  const [showNav, setShowNav] = useState(true); // show/hide state
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showNav, setShowNav] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const lastScrollY = useRef(0);
 
-  // Scroll listener
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setShowNav(false);
-    } else {
-      setShowNav(true);
-    }
-    setLastScrollY(window.scrollY);
-  };
+  const menuItems = [
+    { name: "Topics", path: "/topics" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about" },
+  ];
 
   useEffect(() => {
+    const updateIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    updateIsMobile();
+
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          setShowNav(currentScrollY < lastScrollY.current || currentScrollY < 10);
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
-  const linkStyle = {
-    display: "block",
-    padding: "14px 20px",
-    textDecoration: "none",
-    cursor: "pointer",
-    fontFamily: "'Roboto', sans-serif",
+  const navStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 20px",
+    backgroundColor: "white",
+    boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+    position: "fixed",
+    top: showNav ? 0 : "-100px",
+    width: "100%",
+    transition: "top 0.3s ease-in-out",
+    zIndex: 1000,
+    height: "80px",
+    boxSizing: "border-box",
   };
 
-  const dropdownLinkStyle = {
+  const menuListStyle = {
+    listStyleType: "none",
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    alignItems: isMobile ? "flex-start" : "center",
+    gap: isMobile ? "0" : "10px",
+    paddingRight: isMobile ? 0 : "20px",
+    backgroundColor: isMobile ? "white" : "transparent",
+    position: isMobile ? "fixed" : "static",
+    top: "80px",
+    right: 0,
+    width: isMobile ? "200px" : "auto",
+    boxShadow: isMobile ? "0 2px 8px rgba(0,0,0,0.15)" : "none",
+    borderRadius: isMobile ? "0 0 0 8px" : "0",
+    transform: isMobile
+      ? mobileMenuOpen
+        ? "translateX(0)"
+        : "translateX(100%)"
+      : "none",
+    transition: "transform 0.3s ease-in-out",
+    zIndex: 999,
+  };
+
+  const linkStyle = (index) => ({
     display: "block",
-    padding: "8px 16px",
     textDecoration: "none",
     cursor: "pointer",
-    borderRadius: "4px",
     fontFamily: "'Roboto', sans-serif",
+    backgroundColor: hovered === index ? "#b3f2ffff" : "transparent",
+    color: "black",
+    borderRadius: "6px",
+    transition: "0.3s",
+    padding: isMobile ? "12px 20px" : "14px 20px",
+    width: isMobile ? "100%" : "auto",
+  });
+
+  const hamburgerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    width: "30px",
+    height: "25px",
+    cursor: "pointer",
+    
+    padding: "5px",
+    borderRadius: "4px",
+  };
+
+  const barStyle = {
+    width: "100%",
+    height: "6px",
+    backgroundColor: "black",
+    borderRadius: "2px",
+    transition: "all 0.3s ease",
   };
 
   return (
-    <>
-      <nav
+    <nav style={navStyle}>
+      {/* Logo */}
+      <Link
+        to="/"
         style={{
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
-          padding: "0 20px",
-          backgroundColor: "white",
-          boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
-          position: "fixed",
-          top: showNav ? "0" : "-80px",
-          width: "100%",
-          transition: "top 0.3s ease-in-out",
-          zIndex: 1000,
+          gap: "10px",
+          textDecoration: "none",
         }}
+        onClick={() => setMobileMenuOpen(false)}
       >
-        {/* Logo + site name clickable */}
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-          <img src="/assets/react.svg" alt="logo" style={{ height: "40px" }} />
-          <span
-            style={{
-              fontWeight: "bold",
-              fontSize: "20px",
-              fontFamily: "'Roboto', sans-serif",
-              color: "black",
-            }}
-          >
-            My React Journey
-          </span>
-        </Link>
-
-        {/* Nav links */}
-        <ul
+        <img src="/assets/react.svg" alt="logo" style={{ height: "40px" }} />
+        <span
           style={{
-            listStyleType: "none",
-            margin: 0,
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            gap: "5px",
-            paddingRight: "20px",
+            fontWeight: "bold",
+            fontSize: "20px",
+            fontFamily: "'Roboto', sans-serif",
+            color: "black",
           }}
         >
-          {/* Topics dropdown */}
-         
-          {/* Other nav links */}
-          {[
-            {name:"Topics ", path:"/Topics"},
-            { name: "Projects", path: "/projects" },
-            { name: "Contact", path: "/contact" },
-            { name: "About", path: "/about" },
-          ].map((item, index) => (
-            <li key={item.name}>
-              <Link
-                to={item.path}
-                style={{
-                  ...linkStyle,
-                  backgroundColor: hovered === index ? "#b3f2ffff" : "transparent",
-                  color: "black",
-                  borderRadius: "6px",
-                  transition: "0.3s",
-                }}
-                onMouseEnter={() => setHovered(index)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </>
+          My React Journey
+        </span>
+      </Link>
+
+      {/* Hamburger Icon (Mobile Only) */}
+      {isMobile && (
+        <div
+          role="button"
+          aria-label="Toggle menu"
+          tabIndex={0}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onKeyDown={(e) => e.key === "Enter" && setMobileMenuOpen(!mobileMenuOpen)}
+          style={hamburgerStyle}
+        >
+          <div
+            style={{
+              ...barStyle,
+              transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none",
+            }}
+          />
+          <div style={{ ...barStyle, opacity: mobileMenuOpen ? 0 : 1 }} />
+          <div
+            style={{
+              ...barStyle,
+              transform: mobileMenuOpen ? "rotate(-45deg) translate(7px, -6px)" : "none",
+            }}
+          />
+        </div>
+      )}
+
+      {/* Menu Items */}
+      <ul style={menuListStyle}>
+        {menuItems.map((item, index) => (
+          <li key={item.name} style={{ width: "100%" }}>
+            <Link
+              to={item.path}
+              style={linkStyle(index)}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+              onClick={() => isMobile && setMobileMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

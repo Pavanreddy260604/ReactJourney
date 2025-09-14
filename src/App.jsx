@@ -1,13 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import HomePage from "./components/HomePage.jsx";
-import FragmentsPage from "./components/FragmentsPage.jsx";
-import HooksPage from  "./components/HooksPage.jsx";
-import PropsPage from "./components/PropsPage"
-import StatePage from "./components/StatePage"
-import StylinginReact from "./components/StylingInReact.jsx";
 import Topics from "./components/Topics.jsx";
+import Frame from "./components/Frame.jsx";
+import { allTopics } from "../data/allTopics";
+import HomePage from './components/HomePage.jsx'
 
 function App() {
   return (
@@ -35,15 +32,27 @@ function App() {
         <div style={{ padding: "80px" }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/fragments" element={<FragmentsPage/>} />
-            <Route path="/hooks" element={<HooksPage/>} />
-            <Route path="/props" element={<PropsPage/>} />
-            <Route path="/state" element={<StatePage/>} />
-            <Route path="/style" element={<StylinginReact/>} />
-            <Route path = "TOpics" element= { <Topics/>}/>
+            <Route path = "/Topics" element= { <Topics/>}/>
             <Route path="/projects" element={<h1>Projects Page</h1>} />
             <Route path="/contact" element={<h1>Contact Page</h1>} />
             <Route path="/about" element={<h1>About Page</h1>} />
+            {allTopics.map((topic, idx) => (
+            <Route
+              key={idx}
+              path={topic.path}
+              element={
+                <Frame
+                  title={topic.data.title}
+                  intro={topic.data.intro}
+                  why={topic.data.why}
+                  examples={topic.data.examples}
+                  best={topic.data.best}
+                />
+              }
+            />
+          ))}
+
+
           </Routes>
         </div>
       </div>

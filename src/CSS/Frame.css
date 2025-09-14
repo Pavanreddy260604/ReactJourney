@@ -1,0 +1,139 @@
+.entire {
+  font-family: 'Roboto', sans-serif;
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.head {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.intro {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+.why{
+     font-size: 1.8rem;
+  margin-bottom: 15px;
+
+}
+.why-list{
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+
+}
+.example {
+  margin-bottom: 50px;
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.code {
+  position: relative;
+}
+
+.code-bg {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1E93AB;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tips {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.tip-list {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+.tip-list li {
+  margin-bottom: 10px;
+}
+
+.conlcusion {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .entire {
+    padding:  3px 2px;
+  }
+
+  .head {
+    font-size: 2rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .why {
+    font-size: 1.5rem;
+  }
+
+  .why-list {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .heading {
+    font-size: 1.3rem;
+  }
+
+  .code-bg {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .copy-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+
+  .tips {
+    font-size: 1.5rem;
+  }
+
+  .tip-list {
+    font-size: 1rem;
+    padding-left: 15px;
+  }
+
+  .tip-list li {
+    margin-bottom: 8px;
+  }
+
+  .conlcusion {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
