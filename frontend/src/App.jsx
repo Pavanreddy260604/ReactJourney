@@ -9,7 +9,7 @@ function App() {
   const [allTopics, setAllTopics] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/items")
+    fetch("https://reactjourney.onrender.com/api/items")
       .then(res => res.json())
       .then(data => setAllTopics(data))
       .catch(err => console.log(err));
