@@ -1,0 +1,9 @@
+.spin {
+  animation: pulse 2s ease-in-out infinite;
+  opacity: 0.1;
+}
+
+@keyframes spin {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}

@@ -4,16 +4,48 @@ import NavBar from "./components/NavBar";
 import Topics from "./components/Topics.jsx";
 import Frame from "./components/Frame.jsx";
 import HomePage from './components/HomePage.jsx';
+import { HomePageSkeleton } from "./components/HomePageSkeleton";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";  // default style
+import "./App.css";
+import Skeleton from "react-loading-skeleton";
+
 
 function App() {
   const [allTopics, setAllTopics] = useState([]);
+  const [loading, setLoading] = useState(true); // track loading state
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    NProgress.start(); // start progress bar
+
     fetch("https://reactjourney.onrender.com/api/items")
-      .then(res => res.json())
-      .then(data => setAllTopics(data))
-      .catch(err => console.log(err));
+      .then(res => {
+        if (!res.ok) throw new Error("Network error");
+        return res.json();
+      })
+      .then(data => {
+        setAllTopics(data);
+        setLoading(false); // stop loading
+        NProgress.done();  // stop progress bar
+      })
+      .catch(err => {
+        console.error(err);
+        setError(true);
+        setLoading(false);
+        NProgress.done();
+      });
   }, []);
+
+  if (loading) return <HomePageSkeleton />; // show skeleton while loading
+
+  if (error) {
+    return (
+      <div style={{ textAlign: "center", paddingTop: "100px", color: "red" }}>
+        <h2>Backend is not responding. Please try again later.</h2>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", position: "relative", backgroundColor: "#fff" }}>
@@ -32,7 +64,6 @@ function App() {
           zIndex: 0,
         }}
       />
-
       <div style={{ position: "relative", zIndex: 1 }}>
         <NavBar />
         <div style={{ padding: "80px" }}>
@@ -45,8 +76,8 @@ function App() {
 
             {allTopics.map((topic) => (
               <Route
-                key={topic._id}           
-                path={topic.path}          
+                key={topic._id}
+                path={topic.path}
                 element={
                   <Frame
                     title={topic.title}
