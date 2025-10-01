@@ -1,139 +1,314 @@
+/* Premium EdTech Design - Modern & Professional */
 .entire {
-  font-family: 'Roboto', sans-serif;
-  padding: 40px 20px;
-  max-width: 900px;
+  max-width: 840px;
   margin: 0 auto;
+  padding: 60px 32px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #fafafa;
+  min-height: 100vh;
 }
 
+/* Premium Typography */
 .head {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-weight: 700;
+  margin: 0 0 32px 0;
+  color: #000000;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   text-align: center;
 }
 
 .intro {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
-  line-height: 1.8;
-}
-.why{
-     font-size: 1.8rem;
-  margin-bottom: 15px;
-
-}
-.why-list{
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   line-height: 1.7;
-  margin-bottom: 30px;
-
+  margin: 0 auto 56px auto;
+  color: #666666;
+  text-align: center;
+  max-width: 640px;
+  font-weight: 400;
 }
+
+/* Content Card */
+.content-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+}
+
+/* Section Headers */
+.why {
+  font-size: 1.625rem;
+  font-weight: 700;
+  margin: 0 0 28px 0;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.why::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  background: #0066cc;
+  border-radius: 2px;
+}
+
+.tips {
+  font-size: 1.625rem;
+  font-weight: 700;
+  margin: 56px 0 28px 0;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tips::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  background: #00a396;
+  border-radius: 2px;
+}
+
+/* Content Lists */
+.why-list {
+  margin: 0 0 40px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.why-list li {
+  margin-bottom: 16px;
+  padding: 20px 24px 20px 56px;
+  background: #f8f9ff;
+  border-radius: 8px;
+  border: 1px solid #e8edff;
+  position: relative;
+  color: #333333;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+}
+
+.why-list li:hover {
+  border-color: #0066cc;
+  transform: translateX(2px);
+}
+
+.why-list li::before {
+  content: "💡";
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  font-size: 1.1rem;
+}
+
+.tip-list {
+  margin: 0 0 40px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tip-list li {
+  margin-bottom: 16px;
+  padding: 20px 24px 20px 56px;
+  background: #f0fffb;
+  border-radius: 8px;
+  border: 1px solid #e0f5f1;
+  position: relative;
+  color: #333333;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+}
+
+.tip-list li:hover {
+  border-color: #00a396;
+  transform: translateX(2px);
+}
+
+.tip-list li::before {
+  content: "⭐";
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  font-size: 1.1rem;
+}
+
+/* Examples */
 .example {
-  margin-bottom: 50px;
+  margin: 40px 0;
+  padding: 32px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
 }
 
 .heading {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.heading::before {
+  content: "📋";
+  font-size: 1.1rem;
+}
+
+/* Code Blocks */
 .code {
   position: relative;
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e1e5e9;
+  background: #1e1e1e;
 }
 
 .code-bg {
-  background-color: #1e1e1e;
+  background: #1e1e1e;
   color: #d4d4d4;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 28px;
+  margin: 0;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', 'Roboto Mono', monospace;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   overflow-x: auto;
+  border: none;
+}
+
+.code-bg code {
+  font-family: inherit;
+  white-space: pre;
+  color: #d4d4d4;
 }
 
 .copy-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 6px 12px;
-  border: none;
+  top: 16px;
+  right: 16px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
-  background-color: #1E93AB;
-  color: white;
+  font-size: 0.8125rem;
+  font-weight: 500;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
 }
 
-.tips {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-.tip-list {
-  font-size: 1.1rem;
+/* Conclusion */
+.conclusion {
+  font-size: 1.125rem;
   line-height: 1.7;
-  margin-bottom: 30px;
-  padding-left: 20px;
+  margin: 48px 0 0 0;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
 }
 
-.tip-list li {
-  margin-bottom: 10px;
-}
-
-.conlcusion {
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .entire {
-    padding:  3px 2px;
+    padding: 40px 20px;
   }
-
+  
+  .content-card {
+    padding: 32px 24px;
+  }
+  
   .head {
     font-size: 2rem;
+    margin-bottom: 24px;
   }
-
+  
   .intro {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.125rem;
+    margin-bottom: 40px;
   }
-
-  .why {
-    font-size: 1.5rem;
-  }
-
-  .why-list {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .heading {
-    font-size: 1.3rem;
-  }
-
-  .code-bg {
-    padding: 10px;
-    font-size: 1rem;
-  }
-
-  .copy-btn {
-    padding: 5px 10px;
-    font-size: 0.9rem;
-  }
-
+  
+  .why,
   .tips {
     font-size: 1.5rem;
   }
-
-  .tip-list {
-    font-size: 1rem;
-    padding-left: 15px;
-  }
-
+  
+  .why-list li,
   .tip-list li {
-    margin-bottom: 8px;
-  }
-
-  .conlcusion {
+    padding: 16px 20px 16px 48px;
     font-size: 1rem;
-    line-height: 1.6;
   }
+  
+  .example {
+    padding: 24px;
+    margin: 32px 0;
+  }
+  
+  .heading {
+    font-size: 1.125rem;
+  }
+  
+  .code-bg {
+    padding: 20px;
+  }
+  
+  .conclusion {
+    padding: 24px;
+    font-size: 1.0625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .entire {
+    padding: 32px 16px;
+  }
+  
+  .content-card {
+    padding: 24px 20px;
+  }
+  
+  .head {
+    font-size: 1.75rem;
+  }
+  
+  .why-list li,
+  .tip-list li {
+    padding: 14px 16px 14px 44px;
+  }
+  
+  .code-bg {
+    padding: 16px;
+  }
+}
+
+/* Focus States */
+.copy-btn:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }
