@@ -24,8 +24,8 @@ export default function LoginPage({ setUser }) {
 
     try {
       const url = isSignUp
-        ? "http://localhost:5000/api/users/register"
-        : "http://localhost:5000/api/users/login";
+        ? "https://reactjourney.onrender.com/api/users/register"
+        : "https://reactjourney.onrender.com/api/users/login";
 
       const res = await fetch(url, {
         method: "POST",

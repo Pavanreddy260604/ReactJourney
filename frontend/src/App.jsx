@@ -83,7 +83,7 @@ function App() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-        const response = await fetch("http://localhost:5000/api/items", {
+        const response = await fetch("https://reactjourney.onrender.com/api/items", {
           signal: controller.signal,
           headers: {
             'Content-Type': 'application/json',
