@@ -107,7 +107,7 @@ app.post('/api/users/login', async (req, res) => {
 // Items
 // --------------------
 
-// 1️⃣ Get all items (frontend can use for listing all topics)
+// 1️⃣ Get all items
 app.get('/api/items', async (req, res) => {
   try {
     const items = await Item.find();
@@ -152,7 +152,50 @@ app.post('/api/items', async (req, res) => {
   }
 });
 
-// 5️⃣ DELETE item by ID
+// 5️⃣ UPDATE item by ID - ADD THIS ROUTE
+app.put('/api/items/:id', async (req, res) => {
+  try {
+    const { title, path, intro, why, examples, best } = req.body;
+    
+    // Validate required fields
+    if (!title || !path) {
+      return res.status(400).json({ message: 'Title and path are required' });
+    }
+
+    const updatedItem = await Item.findByIdAndUpdate(
+      req.params.id,
+      {
+        title,
+        path,
+        intro,
+        why,
+        examples,
+        best
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedItem) {
+      return res.status(404).json({ message: 'Topic not found' });
+    }
+
+    res.json(updatedItem);
+  } catch (err) {
+    console.error('Error updating item:', err);
+    
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({ message: 'Validation error', error: err.message });
+    }
+    
+    if (err.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid topic ID' });
+    }
+    
+    res.status(500).json({ message: 'Server error while updating topic' });
+  }
+});
+
+// 6️⃣ DELETE item by ID
 app.delete('/api/items/:id', async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
