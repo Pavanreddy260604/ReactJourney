@@ -10,12 +10,37 @@ function NavBar({ user, setUser }) {
   const navigate = useNavigate();
   const mobileMenuRef = useRef(null);
   const hamburgerRef = useRef(null);
+  const userDropdownRef = useRef(null);
 
   const menuItems = [
-    { name: "Topics", path: "/topics", icon: "📚", color: "#007ACC" },
-    { name: "Projects", path: "/projects", icon: "💼", color: "#10B981" },
-    { name: "Contact", path: "/contact", icon: "📞", color: "#F59E0B" },
-    { name: "About", path: "/about", icon: "ℹ️", color: "#8B5CF6" },
+    { 
+      name: "Learning Topics", 
+      path: "/topics", 
+      icon: "📚", 
+      color: "#007ACC",
+      description: "Explore React concepts"
+    },
+    { 
+      name: "Project Examples", 
+      path: "/projects", 
+      icon: "💼", 
+      color: "#10B981",
+      description: "Real-world applications"
+    },
+    { 
+      name: "Get in Touch", 
+      path: "/contact", 
+      icon: "📞", 
+      color: "#F59E0B",
+      description: "Contact our team"
+    },
+    { 
+      name: "About Platform", 
+      path: "/about", 
+      icon: "ℹ️", 
+      color: "#8B5CF6",
+      description: "Learn about our mission"
+    },
   ];
 
   // Enhanced mobile detection
@@ -36,6 +61,7 @@ function NavBar({ user, setUser }) {
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close mobile menu
       if (
         mobileMenuRef.current && 
         !mobileMenuRef.current.contains(event.target) &&
@@ -43,6 +69,14 @@ function NavBar({ user, setUser }) {
         !hamburgerRef.current.contains(event.target)
       ) {
         setMobileMenuOpen(false);
+      }
+
+      // Close user dropdown
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target)
+      ) {
+        setShowUserDropdown(false);
       }
     };
 
@@ -107,6 +141,26 @@ function NavBar({ user, setUser }) {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleUserProfileEnter = () => {
+    setShowUserDropdown(true);
+  };
+
+  const handleUserProfileLeave = () => {
+    setTimeout(() => {
+      if (!userDropdownRef.current?.matches(':hover')) {
+        setShowUserDropdown(false);
+      }
+    }, 150);
+  };
+
+  const handleDropdownEnter = () => {
+    setShowUserDropdown(true);
+  };
+
+  const handleDropdownLeave = () => {
+    setShowUserDropdown(false);
+  };
+
   // Enhanced Nav Styles
   const navStyle = {
     position: "fixed",
@@ -114,20 +168,20 @@ function NavBar({ user, setUser }) {
     left: 0,
     right: 0,
     height: "60px",
-    background: "rgba(255, 255, 255, 0.95)",
+    background: "rgba(255, 255, 255, 0.98)",
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
     borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0 16px",
+    padding: "0 24px",
     zIndex: 1000,
     transition: "top 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
     boxShadow: "0 2px 20px rgba(0, 0, 0, 0.08)",
   };
 
-  // Enhanced Hamburger Menu - Modern Design
+  // Professional Hamburger Menu
   const HamburgerButton = () => (
     <button
       ref={hamburgerRef}
@@ -137,7 +191,7 @@ function NavBar({ user, setUser }) {
         height: "44px",
         border: "none",
         background: mobileMenuOpen ? "#007ACC" : "transparent",
-        borderRadius: "12px",
+        borderRadius: "10px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -147,41 +201,41 @@ function NavBar({ user, setUser }) {
         position: "relative",
         padding: "10px",
       }}
-      aria-label="Toggle menu"
+      aria-label="Toggle navigation menu"
       aria-expanded={mobileMenuOpen}
     >
       <div style={{
         width: "20px",
         height: "2px",
-        background: mobileMenuOpen ? "white" : "#2D3748",
+        background: mobileMenuOpen ? "white" : "#374151",
         margin: "2px 0",
         transform: mobileMenuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        borderRadius: "2px",
+        borderRadius: "1px",
       }} />
       <div style={{
         width: "20px",
         height: "2px",
-        background: mobileMenuOpen ? "white" : "#2D3748",
+        background: mobileMenuOpen ? "white" : "#374151",
         margin: "2px 0",
         opacity: mobileMenuOpen ? 0 : 1,
         transform: mobileMenuOpen ? "translateX(-10px)" : "none",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        borderRadius: "2px",
+        borderRadius: "1px",
       }} />
       <div style={{
         width: "20px",
         height: "2px",
-        background: mobileMenuOpen ? "white" : "#2D3748",
+        background: mobileMenuOpen ? "white" : "#374151",
         margin: "2px 0",
         transform: mobileMenuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        borderRadius: "2px",
+        borderRadius: "1px",
       }} />
     </button>
   );
 
-  // Modern Mobile Menu Overlay
+  // Professional Mobile Menu Overlay
   const MobileMenu = () => (
     <div
       ref={mobileMenuRef}
@@ -200,16 +254,6 @@ function NavBar({ user, setUser }) {
         overflow: "hidden",
       }}
     >
-      {/* Animated Background */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: "radial-gradient(circle at 30% 20%, rgba(120, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0) 50%)",
-      }} />
-      
       <div style={{
         padding: "32px 24px",
         height: "100%",
@@ -218,20 +262,20 @@ function NavBar({ user, setUser }) {
         overflowY: "auto",
         WebkitOverflowScrolling: "touch",
       }}>
-        {/* Welcome Section */}
+        {/* User Profile Section */}
         {user && (
           <div style={{
             background: "rgba(255, 255, 255, 0.15)",
             backdropFilter: "blur(10px)",
-            borderRadius: "20px",
+            borderRadius: "16px",
             padding: "20px",
             marginBottom: "32px",
             border: "1px solid rgba(255, 255, 255, 0.2)",
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
               <div style={{
-                width: "50px",
-                height: "50px",
+                width: "48px",
+                height: "48px",
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #007ACC, #005a9e)",
                 display: "flex",
@@ -239,20 +283,53 @@ function NavBar({ user, setUser }) {
                 justifyContent: "center",
                 color: "white",
                 fontWeight: "600",
-                fontSize: "18px",
-                border: "3px solid rgba(255, 255, 255, 0.3)",
+                fontSize: "16px",
+                border: "2px solid rgba(255, 255, 255, 0.3)",
               }}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div>
-                <div style={{ color: "white", fontSize: "16px", fontWeight: "600" }}>
+                <div style={{ color: "white", fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>
                   {user.name}
                 </div>
-                <div style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "14px" }}>
+                <div style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "13px", fontWeight: "400" }}>
                   {user.email}
                 </div>
               </div>
             </div>
+            
+            {/* Sign Out Button */}
+            <button
+              onClick={handleLogout}
+              style={{
+                width: "100%",
+                padding: "14px 20px",
+                background: "rgba(239, 68, 68, 0.9)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                borderRadius: "10px",
+                color: "white",
+                fontSize: "15px",
+                fontWeight: "600",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                transition: "all 0.3s ease",
+                marginTop: "12px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(239, 68, 68, 1)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(239, 68, 68, 0.9)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <span style={{ fontSize: "16px" }}>↩️</span>
+              Sign Out
+            </button>
           </div>
         )}
 
@@ -270,94 +347,60 @@ function NavBar({ user, setUser }) {
                 padding: "20px 16px",
                 background: "rgba(255, 255, 255, 0.1)",
                 backdropFilter: "blur(10px)",
-                borderRadius: "16px",
+                borderRadius: "14px",
                 marginBottom: "12px",
                 textDecoration: "none",
                 color: "white",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 transition: "all 0.3s ease",
-                transform: "translateX(0)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-                e.currentTarget.style.transform = "translateX(8px)";
+                e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-                e.currentTarget.style.transform = "translateX(0)";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <div style={{
                 width: "44px",
                 height: "44px",
-                borderRadius: "12px",
+                borderRadius: "10px",
                 background: item.color,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "20px",
+                fontSize: "18px",
+                fontWeight: "500",
               }}>
                 {item.icon}
               </div>
-              <div>
-                <div style={{ fontSize: "16px", fontWeight: "600" }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>
                   {item.name}
                 </div>
-                <div style={{ fontSize: "12px", opacity: 0.8 }}>
-                  Explore {item.name.toLowerCase()}
+                <div style={{ fontSize: "13px", opacity: 0.8, fontWeight: "400" }}>
+                  {item.description}
                 </div>
               </div>
             </Link>
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div style={{ marginTop: "auto", paddingTop: "20px" }}>
-          {user ? (
-            <>
-              <button
-                onClick={handleLogout}
-                style={{
-                  width: "100%",
-                  padding: "18px 24px",
-                  background: "rgba(255, 255, 255, 0.2)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                  borderRadius: "16px",
-                  color: "white",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                  transition: "all 0.3s ease",
-                  marginBottom: "12px",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.8)";
-                  e.currentTarget.style.transform = "scale(1.02)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              >
-                <span>🚪</span>
-                Sign Out
-              </button>
-            </>
-          ) : (
+        {/* Sign In Button */}
+        {!user && (
+          <div style={{ marginTop: "auto", paddingTop: "20px" }}>
             <Link
               to="/Login"
               onClick={handleLinkClick}
               style={{
                 display: "block",
                 width: "100%",
-                padding: "18px 24px",
-                background: "rgba(255, 255, 255, 0.9)",
+                padding: "16px 24px",
+                background: "rgba(255, 255, 255, 0.95)",
                 border: "none",
-                borderRadius: "16px",
+                borderRadius: "14px",
                 color: "#007ACC",
                 fontSize: "16px",
                 fontWeight: "600",
@@ -367,43 +410,48 @@ function NavBar({ user, setUser }) {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "white";
-                e.currentTarget.style.transform = "scale(1.02)";
+                e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)";
-                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)";
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              Sign In
+              Sign In to Account
             </Link>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
 
-  // Desktop User Profile
+  // Professional Desktop User Profile
   const DesktopUserProfile = () => (
-    <div style={{ position: "relative" }}>
+    <div 
+      ref={userDropdownRef}
+      style={{ position: "relative" }}
+      onMouseEnter={handleDropdownEnter}
+      onMouseLeave={handleDropdownLeave}
+    >
       <div 
         style={{
           display: "flex",
           alignItems: "center",
           gap: "12px",
           padding: "8px 16px",
-          borderRadius: "12px",
-          background: showUserDropdown ? "#F7FAFC" : "transparent",
+          borderRadius: "10px",
+          background: showUserDropdown ? "#F8FAFC" : "transparent",
           border: "1px solid transparent",
           cursor: "pointer",
           transition: "all 0.3s ease",
         }}
         onClick={() => setShowUserDropdown(!showUserDropdown)}
-        onMouseEnter={() => setShowUserDropdown(true)}
-        onMouseLeave={() => setTimeout(() => setShowUserDropdown(false), 300)}
+        onMouseEnter={handleUserProfileEnter}
+        onMouseLeave={handleUserProfileLeave}
       >
         <div style={{
-          width: "40px",
-          height: "40px",
+          width: "38px",
+          height: "38px",
           borderRadius: "50%",
           background: "linear-gradient(135deg, #007ACC, #005a9e)",
           display: "flex",
@@ -411,45 +459,107 @@ function NavBar({ user, setUser }) {
           justifyContent: "center",
           color: "white",
           fontWeight: "600",
-          fontSize: "16px",
+          fontSize: "14px",
+          border: "2px solid #E5E7EB"
         }}>
           {user.name.charAt(0).toUpperCase()}
         </div>
         <div>
-          <div style={{ fontSize: "14px", fontWeight: "600", color: "#2D3748" }}>
+          <div style={{ fontSize: "14px", fontWeight: "600", color: "#1F2937" }}>
             {user.name}
           </div>
-          <div style={{ fontSize: "12px", color: "#718096" }}>
+          <div style={{ fontSize: "12px", color: "#6B7280", fontWeight: "400" }}>
             {user.email}
           </div>
         </div>
       </div>
 
       {showUserDropdown && (
-        <div style={{
-          position: "absolute",
-          top: "100%",
-          right: 0,
-          marginTop: "8px",
-          background: "white",
-          border: "1px solid #E2E8F0",
-          borderRadius: "16px",
-          boxShadow: "0 20px 60px rgba(0, 0, 0, 0.15)",
-          padding: "8px",
-          minWidth: "200px",
-          zIndex: 1001,
-          animation: "dropdownFade 0.2s ease-out",
-        }}>
-          <div style={{ padding: "8px 16px 4px", color: "#A0AEC0", fontSize: "12px", fontWeight: "600" }}>
-            ACCOUNT
+        <div 
+          style={{
+            position: "absolute",
+            top: "100%",
+            right: 0,
+            marginTop: "8px",
+            background: "white",
+            border: "1px solid #E5E7EB",
+            borderRadius: "14px",
+            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.15)",
+            padding: "8px",
+            minWidth: "220px",
+            zIndex: 1001,
+            animation: "dropdownFade 0.2s ease-out",
+          }}
+          onMouseEnter={handleDropdownEnter}
+          onMouseLeave={handleDropdownLeave}
+        >
+          <div style={{ 
+            padding: "8px 16px 6px", 
+            color: "#6B7280", 
+            fontSize: "11px", 
+            fontWeight: "600",
+            textTransform: "uppercase",
+            letterSpacing: "0.5px"
+          }}>
+            Account Management
           </div>
-          <div style={{ padding: "12px 16px", cursor: "pointer", borderRadius: "8px", transition: "background 0.2s" }}>
-            👤 Profile Settings
+          
+          <div style={{ 
+            padding: "12px 16px", 
+            cursor: "pointer", 
+            borderRadius: "8px", 
+            transition: "all 0.2s ease",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            fontSize: "14px",
+            color: "#374151",
+            fontWeight: "500"
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#F3F4F6";
+            e.currentTarget.style.color = "#007ACC";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#374151";
+          }}
+          >
+            <span style={{ fontSize: "16px" }}>👤</span>
+            Profile Settings
           </div>
-          <div style={{ padding: "12px 16px", cursor: "pointer", borderRadius: "8px", transition: "background 0.2s" }}>
-            ⚙️ Preferences
+          
+          <div style={{ 
+            padding: "12px 16px", 
+            cursor: "pointer", 
+            borderRadius: "8px", 
+            transition: "all 0.2s ease",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            fontSize: "14px",
+            color: "#374151",
+            fontWeight: "500"
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#F3F4F6";
+            e.currentTarget.style.color = "#007ACC";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#374151";
+          }}
+          >
+            <span style={{ fontSize: "16px" }}>⚙️</span>
+            Preferences
           </div>
-          <div style={{ height: "1px", background: "#E2E8F0", margin: "8px 0" }} />
+          
+          <div style={{ 
+            height: "1px", 
+            background: "#E5E7EB", 
+            margin: "8px 12px" 
+          }} />
+          
           <button 
             onClick={handleLogout}
             style={{
@@ -457,16 +567,26 @@ function NavBar({ user, setUser }) {
               padding: "12px 16px",
               background: "transparent",
               border: "none",
-              color: "#E53E3E",
+              color: "#DC2626",
               textAlign: "left",
               cursor: "pointer",
               borderRadius: "8px",
               fontSize: "14px",
               fontWeight: "500",
-              transition: "background 0.2s",
+              transition: "all 0.2s ease",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#FEF2F2";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
             }}
           >
-            🚪 Sign Out
+            <span style={{ fontSize: "16px" }}>↩️</span>
+            Sign Out
           </button>
         </div>
       )}
@@ -490,7 +610,7 @@ function NavBar({ user, setUser }) {
         >
           <img 
             src="/assets/react.svg" 
-            alt="React Journey" 
+            alt="React Journey Logo" 
             style={{ 
               height: "32px", 
               width: "32px",
@@ -512,27 +632,28 @@ function NavBar({ user, setUser }) {
         {/* Desktop Navigation */}
         {!isMobile && (
           <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{ display: "flex", gap: "4px" }}>
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
                   style={{
-                    padding: "10px 20px",
+                    padding: "10px 16px",
                     textDecoration: "none",
-                    color: "#4A5568",
+                    color: "#374151",
                     fontWeight: "500",
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     transition: "all 0.3s ease",
-                    fontSize: "15px",
+                    fontSize: "14px",
+                    letterSpacing: "-0.01em",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#F7FAFC";
+                    e.currentTarget.style.background = "#F3F4F6";
                     e.currentTarget.style.color = item.color;
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "#4A5568";
+                    e.currentTarget.style.color = "#374151";
                   }}
                 >
                   {item.name}
@@ -579,6 +700,14 @@ function NavBar({ user, setUser }) {
           /* Smooth transitions for all interactive elements */
           button, a {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          /* Better touch targets for mobile */
+          @media (max-width: 768px) {
+            button, a {
+              min-height: 44px;
+              min-width: 44px;
+            }
           }
         `}
       </style>

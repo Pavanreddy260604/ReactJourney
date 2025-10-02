@@ -1,5 +1,44 @@
 {
-  "dependencies": {
-    "bcrypt": "^6.0.0"
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "Secure Electron desktop wrapper for my web app",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:frontend",
+    "dist": "npm run build && electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.example.myelectronapp",
+    "productName": "MyElectronApp",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "electron/resources/app.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

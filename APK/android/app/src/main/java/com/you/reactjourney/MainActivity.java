@@ -1,4 +1,4 @@
-package com.PavanReddy.ReactJourney;
+package com.you.reactjourney;
 
 import com.getcapacitor.BridgeActivity;
 

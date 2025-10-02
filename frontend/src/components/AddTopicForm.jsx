@@ -153,7 +153,7 @@ const AddTopicForm = ({ user }) => {
     setSuccess("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/items", {
+      const res = await fetch("https://reactjourney.onrender.com/api/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

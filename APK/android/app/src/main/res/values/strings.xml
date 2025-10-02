@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ReactJourney</string>
-    <string name="title_activity_main">ReactJourney</string>
-    <string name="package_name">com.PavanReddy.ReactJourney</string>
-    <string name="custom_url_scheme">com.PavanReddy.ReactJourney</string>
+    <string name="app_name">React Journey</string>
+    <string name="title_activity_main">React Journey</string>
+    <string name="package_name">com.you.reactjourney</string>
+    <string name="custom_url_scheme">com.you.reactjourney</string>
 </resources>

@@ -1,5 +1,5 @@
 {
-  "appId": "com.PavanReddy.ReactJourney",
-  "appName": "ReactJourney",
-  "webDir": "dist"
+  "appId": "com.you.reactjourney",
+  "appName": "React Journey",
+  "webDir": "../frontend/dist"
 }

@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.PavanReddy.ReactJourney"
+    namespace "com.you.reactjourney"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.PavanReddy.ReactJourney"
+        applicationId "com.you.reactjourney"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
